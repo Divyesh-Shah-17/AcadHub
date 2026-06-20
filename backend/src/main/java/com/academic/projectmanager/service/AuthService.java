@@ -27,14 +27,15 @@ public class AuthService {
     private UserRepository userRepository;
 
     public LoginResponse login(LoginRequest request) {
+        String username = request.getUsername().toLowerCase();
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+                new UsernamePasswordAuthenticationToken(username, request.getPassword())
         );
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         String token = jwtTokenUtil.generateToken(userDetails);
 
-        User user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        User user = userRepository.findByUsername(username).orElseThrow();
 
         return new LoginResponse(
                 token,

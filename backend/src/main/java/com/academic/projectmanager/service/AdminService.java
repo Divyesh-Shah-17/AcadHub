@@ -55,7 +55,7 @@ public class AdminService {
             if (i == 0 && row[0].equalsIgnoreCase("username")) {
                 continue;
             }
-            String username = row[0].trim();
+            String username = row[0].trim().toLowerCase();
             String fullName = row[1].trim();
             String email = row[2].trim();
             String yearVal = row[3].trim();
@@ -100,7 +100,7 @@ public class AdminService {
             if (i == 0 && row[0].equalsIgnoreCase("username")) {
                 continue;
             }
-            String username = row[0].trim();
+            String username = row[0].trim().toLowerCase();
             String fullName = row[1].trim();
             String email = row[2].trim();
             String yearVal = row[3].trim();
@@ -329,13 +329,13 @@ public class AdminService {
     public void updateGroupTeachers(Long groupId, String primaryUsername, String secondaryUsername) {
         Group group = groupRepository.findById(groupId).orElseThrow();
         if (primaryUsername != null && !primaryUsername.isBlank()) {
-            Teacher pt = teacherRepository.findByUserUsername(primaryUsername.trim()).orElseThrow();
+            Teacher pt = teacherRepository.findByUserUsername(primaryUsername.trim().toLowerCase()).orElseThrow();
             group.setPrimaryTeacher(pt);
         } else {
             group.setPrimaryTeacher(null);
         }
         if (secondaryUsername != null && !secondaryUsername.isBlank()) {
-            Teacher st = teacherRepository.findByUserUsername(secondaryUsername.trim()).orElseThrow();
+            Teacher st = teacherRepository.findByUserUsername(secondaryUsername.trim().toLowerCase()).orElseThrow();
             group.setSecondaryTeacher(st);
         } else {
             group.setSecondaryTeacher(null);

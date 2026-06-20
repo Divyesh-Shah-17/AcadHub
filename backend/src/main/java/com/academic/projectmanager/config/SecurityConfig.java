@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers(org.springframework.http.HttpMethod.GET, "/api/admin/years").authenticated()
                 .antMatchers("/api/admin/teacher-reviews").hasRole("ADMIN")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .antMatchers("/api/teacher/**").hasRole("TEACHER")

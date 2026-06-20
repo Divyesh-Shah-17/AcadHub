@@ -90,7 +90,7 @@ public class TeacherService {
 
             String[] usernames = studentUsernamesStr.split("[;,]");
             for (String username : usernames) {
-                String u = username.trim();
+                String u = username.trim().toLowerCase();
                 Optional<Student> studentOpt = studentRepository.findByUserUsername(u);
                 if (studentOpt.isPresent()) {
                     Student s = studentOpt.get();
@@ -104,13 +104,13 @@ public class TeacherService {
     public void assignTeachersToGroup(Long groupId, String primaryUsername, String secondaryUsername) {
         Group group = groupRepository.findById(groupId).orElseThrow();
         if (primaryUsername != null && !primaryUsername.isBlank()) {
-            Teacher pt = teacherRepository.findByUserUsername(primaryUsername.trim()).orElseThrow();
+            Teacher pt = teacherRepository.findByUserUsername(primaryUsername.trim().toLowerCase()).orElseThrow();
             group.setPrimaryTeacher(pt);
         } else {
             group.setPrimaryTeacher(null);
         }
         if (secondaryUsername != null && !secondaryUsername.isBlank()) {
-            Teacher st = teacherRepository.findByUserUsername(secondaryUsername.trim()).orElseThrow();
+            Teacher st = teacherRepository.findByUserUsername(secondaryUsername.trim().toLowerCase()).orElseThrow();
             group.setSecondaryTeacher(st);
         } else {
             group.setSecondaryTeacher(null);
@@ -136,11 +136,11 @@ public class TeacherService {
             if (groupOpt.isPresent()) {
                 Group group = groupOpt.get();
                 if (!primaryUsername.isEmpty()) {
-                    Teacher pt = teacherRepository.findByUserUsername(primaryUsername).orElseThrow();
+                    Teacher pt = teacherRepository.findByUserUsername(primaryUsername.toLowerCase()).orElseThrow();
                     group.setPrimaryTeacher(pt);
                 }
                 if (!secondaryUsername.isEmpty()) {
-                    Teacher st = teacherRepository.findByUserUsername(secondaryUsername).orElseThrow();
+                    Teacher st = teacherRepository.findByUserUsername(secondaryUsername.toLowerCase()).orElseThrow();
                     group.setSecondaryTeacher(st);
                 }
                 groupRepository.save(group);
@@ -180,12 +180,12 @@ public class TeacherService {
 
     public ProjectComment addCommentToIdea(Long ideaId, String commentText, String username) {
         ProjectIdea idea = projectIdeaRepository.findById(ideaId).orElseThrow();
-        User author = userRepository.findByUsername(username).orElseThrow();
+        User author = userRepository.findByUsername(username.toLowerCase()).orElseThrow();
 
         if (author.getRole() == Role.ROLE_TEACHER) {
-            validateTeacherAssignedToGroup(username, idea.getGroup());
+            validateTeacherAssignedToGroup(username.toLowerCase(), idea.getGroup());
         } else if (author.getRole() == Role.ROLE_STUDENT) {
-            Student student = studentRepository.findByUserUsername(username).orElseThrow();
+            Student student = studentRepository.findByUserUsername(username.toLowerCase()).orElseThrow();
             if (student.getGroup() == null || !student.getGroup().getId().equals(idea.getGroup().getId())) {
                 throw new SecurityException("Student not in group");
             }

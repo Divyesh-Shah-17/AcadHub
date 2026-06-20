@@ -6,11 +6,14 @@ import { AdminAnalytics } from './pages/AdminAnalytics';
 import { AdminAllocationControl } from './pages/AdminAllocationControl';
 import { AdminRecords } from './pages/AdminRecords';
 import { AdminArchives } from './pages/AdminArchives';
-import { TeacherDashboard } from './pages/TeacherDashboard';
 import { StudentGroupInfo } from './pages/StudentGroupInfo';
 import { StudentProjectIdeas } from './pages/StudentProjectIdeas';
 import { StudentWeeklyProgress } from './pages/StudentWeeklyProgress';
 import { StudentTeacherReview } from './pages/StudentTeacherReview';
+import { TeacherGroups } from './pages/TeacherGroups';
+import { TeacherIdeaApprovals } from './pages/TeacherIdeaApprovals';
+import { TeacherEvaluations } from './pages/TeacherEvaluations';
+import { TeacherAnalytics } from './pages/TeacherAnalytics';
 import { Layout } from './components/Layout';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -102,10 +105,48 @@ function App() {
           
           <Route
             path="/teacher"
+            element={<Navigate to="/teacher/my-groups" replace />}
+          />
+
+          <Route
+            path="/teacher/my-groups"
             element={
               <ProtectedRoute allowedRoles={['ROLE_TEACHER']}>
                 <Layout>
-                  <TeacherDashboard />
+                  <TeacherGroups />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/teacher/idea-approvals"
+            element={
+              <ProtectedRoute allowedRoles={['ROLE_TEACHER']}>
+                <Layout>
+                  <TeacherIdeaApprovals />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/teacher/evaluations"
+            element={
+              <ProtectedRoute allowedRoles={['ROLE_TEACHER']}>
+                <Layout>
+                  <TeacherEvaluations />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/teacher/analytics"
+            element={
+              <ProtectedRoute allowedRoles={['ROLE_TEACHER']}>
+                <Layout>
+                  <TeacherAnalytics />
                 </Layout>
               </ProtectedRoute>
             }

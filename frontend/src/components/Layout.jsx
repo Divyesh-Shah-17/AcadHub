@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Menu, X, LogOut, BookOpen, Users, Calendar, Award, CheckCircle, BarChart2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const Layout = ({ children }) => {
   const { user, logout, activeYear, setActiveYear, apiFetch, reviewsTriggered } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
@@ -51,7 +52,10 @@ export const Layout = ({ children }) => {
       { name: 'Historical Archives', icon: BookOpen, path: '/admin/archives' }
     ],
     ROLE_TEACHER: [
-      { name: 'Dashboard', icon: Users, path: '/teacher' }
+      { name: 'My Groups', icon: Users, path: '/teacher/my-groups' },
+      { name: 'Idea Approvals', icon: BookOpen, path: '/teacher/idea-approvals' },
+      { name: 'Evaluations', icon: Calendar, path: '/teacher/evaluations' },
+      { name: 'Analytics', icon: BarChart2, path: '/teacher/analytics' }
     ],
     ROLE_STUDENT: [
       { name: 'Group Workspace', icon: Users, path: '/student/group-info' },
@@ -102,6 +106,7 @@ export const Layout = ({ children }) => {
               {currentNav.map((item) => {
                 const isReviewLink = item.path === '/student/teacher-review';
                 const isDisabled = isReviewLink && !reviewsTriggered;
+                const isActive = location.pathname === item.path;
                 return (
                   <button
                     key={item.name}
@@ -115,10 +120,12 @@ export const Layout = ({ children }) => {
                     className={`flex items-center space-x-3 w-full px-4 py-3 rounded-lg transition-colors duration-150 h-12 focus:outline-none ${
                       isDisabled
                         ? 'opacity-40 cursor-not-allowed text-slate-500'
+                        : isActive
+                        ? 'bg-indigo-600 text-white font-semibold shadow-sm focus:ring-2 focus:ring-indigo-400'
                         : 'text-slate-300 hover:text-white hover:bg-slate-800 focus:ring-2 focus:ring-indigo-500'
                     }`}
                   >
-                    <item.icon className={`h-5 w-5 ${isDisabled ? 'text-slate-600' : 'text-indigo-400'}`} />
+                    <item.icon className={`h-5 w-5 ${isDisabled ? 'text-slate-600' : isActive ? 'text-white' : 'text-indigo-400'}`} />
                     <span className="font-medium">{item.name}</span>
                   </button>
                 );
@@ -173,6 +180,7 @@ export const Layout = ({ children }) => {
           {currentNav.map((item) => {
             const isReviewLink = item.path === '/student/teacher-review';
             const isDisabled = isReviewLink && !reviewsTriggered;
+            const isActive = location.pathname === item.path;
             return (
               <button
                 key={item.name}
@@ -185,10 +193,12 @@ export const Layout = ({ children }) => {
                 className={`flex items-center space-x-3 w-full px-4 py-3 rounded-lg transition-colors duration-150 h-12 focus:outline-none ${
                   isDisabled
                     ? 'opacity-40 cursor-not-allowed text-slate-500'
+                    : isActive
+                    ? 'bg-indigo-600 text-white font-semibold shadow-sm focus:ring-2 focus:ring-indigo-400'
                     : 'text-slate-300 hover:text-white hover:bg-slate-800 focus:ring-2 focus:ring-indigo-500'
                 }`}
               >
-                <item.icon className={`h-5 w-5 ${isDisabled ? 'text-slate-600' : 'text-indigo-400'}`} />
+                <item.icon className={`h-5 w-5 ${isDisabled ? 'text-slate-600' : isActive ? 'text-white' : 'text-indigo-400'}`} />
                 <span className="font-medium">{item.name}</span>
               </button>
             );
