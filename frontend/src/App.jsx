@@ -14,6 +14,7 @@ import { TeacherGroups } from './pages/TeacherGroups';
 import { TeacherIdeaApprovals } from './pages/TeacherIdeaApprovals';
 import { TeacherEvaluations } from './pages/TeacherEvaluations';
 import { TeacherAnalytics } from './pages/TeacherAnalytics';
+import { ProfilePage } from './pages/ProfilePage';
 import { Layout } from './components/Layout';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -196,6 +197,17 @@ function App() {
               <ProtectedRoute allowedRoles={['ROLE_STUDENT']}>
                 <Layout>
                   <StudentTeacherReview />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute allowedRoles={['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']}>
+                <Layout>
+                  <ProfilePage />
                 </Layout>
               </ProtectedRoute>
             }

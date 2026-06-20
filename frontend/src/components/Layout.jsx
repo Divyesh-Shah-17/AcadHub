@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Menu, X, LogOut, BookOpen, Users, Calendar, Award, CheckCircle, BarChart2 } from 'lucide-react';
+import { Menu, X, LogOut, BookOpen, Users, Calendar, Award, CheckCircle, BarChart2, Settings } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const Layout = ({ children }) => {
@@ -156,6 +156,20 @@ export const Layout = ({ children }) => {
                 <p className="text-xs text-slate-400 truncate">{user?.username}</p>
               </div>
               <button
+                onClick={() => {
+                  navigate('/profile');
+                  setDrawerOpen(false);
+                }}
+                className={`flex items-center space-x-3 w-full px-4 py-3 rounded-lg transition-colors duration-150 h-12 focus:outline-none ${
+                  location.pathname === '/profile'
+                    ? 'bg-indigo-600 text-white font-semibold shadow-sm focus:ring-2 focus:ring-indigo-400'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800 focus:ring-2 focus:ring-indigo-500'
+                }`}
+              >
+                <Settings className={`h-5 w-5 ${location.pathname === '/profile' ? 'text-white' : 'text-indigo-400'}`} />
+                <span className="font-medium">Profile Settings</span>
+              </button>
+              <button
                 onClick={handleLogout}
                 className="flex items-center space-x-3 w-full px-4 py-3 rounded-lg text-rose-400 hover:text-rose-200 hover:bg-rose-950/30 focus:outline-none focus:ring-2 focus:ring-rose-500 transition-colors duration-150 h-12"
               >
@@ -228,6 +242,19 @@ export const Layout = ({ children }) => {
             <p className="text-sm font-semibold truncate text-slate-200">{user?.fullName}</p>
             <p className="text-xs text-slate-400 truncate">{user?.username}</p>
           </div>
+          <button
+            onClick={() => {
+              navigate('/profile');
+            }}
+            className={`flex items-center space-x-3 w-full px-4 py-3 rounded-lg transition-colors duration-150 h-12 focus:outline-none ${
+              location.pathname === '/profile'
+                ? 'bg-indigo-600 text-white font-semibold shadow-sm focus:ring-2 focus:ring-indigo-400'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800 focus:ring-2 focus:ring-indigo-500'
+            }`}
+          >
+            <Settings className={`h-5 w-5 ${location.pathname === '/profile' ? 'text-white' : 'text-indigo-400'}`} />
+            <span className="font-medium">Profile Settings</span>
+          </button>
           <button
             onClick={handleLogout}
             className="flex items-center space-x-3 w-full px-4 py-3 rounded-lg text-rose-400 hover:text-rose-200 hover:bg-rose-950/30 focus:outline-none focus:ring-2 focus:ring-rose-500 transition-colors duration-150 h-12"

@@ -8,6 +8,7 @@ F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\pr
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\service\CsvService.java
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\config\InitialDataLoader.java
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\entity\User.java
+F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\dto\ProfileUpdateRequest.java
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\repository\ProjectCommentRepository.java
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\entity\TeacherReview.java
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\repository\ProjectIdeaRepository.java
@@ -34,6 +35,7 @@ F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\pr
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\entity\WeeklyProgress.java
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\controller\StudentController.java
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\entity\ProjectIdea.java
+F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\controller\UserController.java
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\entity\Student.java
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\repository\GroupRepository.java
 F:\Dev\Academic Project Management\AcadHub\backend\src\main\java\com\academic\projectmanager\config\JwtTokenUtil.java
